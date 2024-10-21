@@ -43,7 +43,7 @@ au FocusGained,BufEnter * silent! checktime
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
+let mapleader=" "
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -57,7 +57,9 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
+" set so=7
+noremap K 5k
+noremap J 5j
 
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en'
@@ -112,6 +114,8 @@ set showmatch
 
 " How many tenths of a second to blink when matching brackets
 set mat=2
+
+set scrolloff=5
 
 " No annoying sound on errors
 set noerrorbells
@@ -208,17 +212,36 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <C-space> ?
+" map <space> /
+" map <C-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
+" Split window quickly
+map sl :set splitright<CR>:vsplit<CR>
+map sh :set nosplitright<CR>:vsplit<CR>
+map sk :set nosplitbelow<CR>:split<CR>
+map sj :set splitbelow<CR>:split<CR>
+
+" Resize windows quickly
+map <up> :res +5<CR>
+map <down> :res -5<CR>
+map <left> :vertical resize-5<CR>
+map <right> :vertical resize+5<CR>
+
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
+map <LEADER>l <C-w>l
+map <LEADER>h <C-w>h
+map <LEADER>k <C-w>k
+map <LEADER>j <C-w>j
+
+" Duplicate words
+map <LEADER>fd /\(\<\w\+\>\)\_s*\1
 
 " Close the current buffer
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
@@ -230,15 +253,19 @@ map <leader>l :bnext<cr>
 map <leader>h :bprevious<cr>
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext<cr>
+map tu :tabe<CR>
+map ti :tabe %<CR>
+map th :-tabnext<CR>
+map tl :+tabnext<CR>
+" map <leader>tn :tabnew<cr>
+" map <leader>to :tabonly<cr>
+" map <leader>tc :tabclose<cr>
+" map <leader>tm :tabmove
+" map <leader>t<leader> :tabnext<cr>
 
-" Let 'tl' toggle between this and the last accessed tab
+" Let 'tl' toggle between this and the previous accessed tab
 let g:lasttab = 1
-nmap <leader>tl :exe "tabn ".g:lasttab<CR>
+nmap <leader>tp :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 
@@ -307,13 +334,19 @@ endif
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
+" map <leader>ss :setlocal spell!<cr>
+map <leader>sc :setlocal spell!<cr>
 
 " Shortcuts using <leader>
 map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
+map <LEADER><LEADER>   <Esc>/TBR<CR>:nohlsearch<CR>
+map <LEADER>a  <Esc>oprintf("[debug]: %s\t%d\n", __func__, __LINE__);<CR><Esc>
+map <LEADER>r  <Esc>a"\033[0;31m" "\033[0m"<Esc>
+map <LEADER>t  <Esc>o/**<CR>TBR<CR>/<Esc>
+map <LEADER>c  <Esc>o```<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
