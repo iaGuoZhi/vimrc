@@ -223,6 +223,7 @@ map sl :set splitright<CR>:vsplit<CR>
 map sh :set nosplitright<CR>:vsplit<CR>
 map sk :set nosplitbelow<CR>:split<CR>
 map sj :set splitbelow<CR>:split<CR>
+map <LEADER>L :wincmd =<CR>
 
 " Resize windows quickly
 map <up> :res +5<CR>
@@ -249,8 +250,8 @@ map <leader>bd :Bclose<cr>:tabclose<cr>gT
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
 
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
+" map <leader>l :bnext<cr>
+" map <leader>h :bprevious<cr>
 
 " Useful mappings for managing tabs
 map tu :tabe<CR>
@@ -292,10 +293,17 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 """"""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
+set autochdir
+set showcmd
+set formatoptions-=tc
 
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
+" Show command autocomplete
+set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
+set wildmenu                                                 " show a navigable menu for tab completion
+set wildmode=longest,list,full
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -337,11 +345,14 @@ endif
 " map <leader>ss :setlocal spell!<cr>
 map <leader>sc :setlocal spell!<cr>
 
+map R :source ~/.vimrc<CR>
+
 " Shortcuts using <leader>
 map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
+map <LEADER>rc :e ~/.vim_runtime/vimrcs/basic.vim<CR>
 map <LEADER><LEADER>   <Esc>/TBR<CR>:nohlsearch<CR>
 map <LEADER>a  <Esc>oprintf("[debug]: %s\t%d\n", __func__, __LINE__);<CR><Esc>
 map <LEADER>r  <Esc>a"\033[0;31m" "\033[0m"<Esc>
