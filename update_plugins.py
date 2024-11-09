@@ -89,6 +89,8 @@ vim-lsp https://github.com/prabirshrestha/vim-lsp
 vim-lsp-settings https://github.com/mattn/vim-lsp-settings
 asyncomplete.vim https://github.com/prabirshrestha/asyncomplete.vim
 asyncomplete-lsp.vim https://github.com/prabirshrestha/asyncomplete-lsp.vim
+vim-auto-popemenu https://github.com/skywind3000/vim-auto-popmenu.git
+vim-dict https://github.com/skywind3000/vim-dict.git
 """.strip()
 
 
