@@ -157,16 +157,28 @@ nnoremap <silent> <leader>z :Goyo<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ale (syntax checker and linter)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '!'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:airline#extensions#ale#enable = 1
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 1
+
 let g:ale_linters = {
+\   'c': ['clangd'],
+\   'c++': ['clangd'],
+\   'python3': ['pylint'],
 \   'javascript': ['eslint'],
 \   'python': ['flake8'],
 \   'go': ['go', 'golint', 'errcheck']
 \}
 
 "nmap <silent> <leader>a <Plug>(ale_next_wrap)
-
-" Disabling highlighting
-let g:ale_set_highlights = 0
+map <LEADER>d  <Esc>:ALEDetail<CR>
 
 " Only run linting when saving the file
 let g:ale_lint_on_text_changed = 'never'
@@ -205,6 +217,8 @@ inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 " allow modifying the completeopt variable, or it will
 " be overridden all the time
 let g:asyncomplete_auto_completeopt = 0
+let g:lsp_diagnostics_enabled = 0
+let g:lsp_auto_open_diagnostics = 0
 
 set completeopt=menuone,noinsert,noselect,preview
 
