@@ -89,7 +89,7 @@ set hid
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
+" set whichwrap+=<,>,h,l
 
 " Ignore case when searching
 set ignorecase
@@ -131,6 +131,7 @@ endif
 " Add a bit extra margin to the left
 set foldcolumn=1
 
+set tags=tags;/
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
